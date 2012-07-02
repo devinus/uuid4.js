@@ -1,12 +1,8 @@
-(function(window, Math){
-
-var rand = Math.random;
+(function(window, random) {
 
 function uuid4() {
-  var uuid = "", r = rand, i, v;
+  var r = random, uuid = "", i, v;
   for (i = 0; i < 32; i++) {
-    v = r() * 16 | 0;
-
     switch (i) {
       case 12:
         uuid += '-4'; break;
@@ -15,6 +11,7 @@ function uuid4() {
       case 20:
         uuid += '-';
       default:
+        v = r() * 16 | 0;
         uuid += (i === 16 ? (v & 3 | 8) : v).toString(16);
     }
   }
@@ -23,4 +20,4 @@ function uuid4() {
 
 window.uuid4 = uuid4;
 
-})(this, Math);
+})(this, Math.random);
